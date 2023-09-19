@@ -5,7 +5,7 @@ function Product(props){ //properties
     const [like,setLike] = useState(false); // sẽ có 1 biến like và 1 hàm setLike để thay đổi giá trị của biến like
     // khi biến like thay đổi giá trị, giao diện sử dụng like sẽ tự động cập nhật theo
     // state: gía trị riêng cho mỗi component
-    const change = ()=>{ // 1 function
+    const change = ()=>{ // khai bao 1 function
         setLike(!like);   
     }
     return (
