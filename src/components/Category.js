@@ -20,15 +20,40 @@ function Category(props){
             qty: 5,
             image:"/images/logo192.png"
         }
+        ,
+        {
+            name:"Iphone 15",
+            price: 1800,
+            qty: 5,
+            image:"/images/logo192.png"
+        }
+        ,
+        {
+            name:"Iphone 15",
+            price: 1800,
+            qty: 5,
+            image:"/images/logo192.png"
+        }
+        ,
+        {
+            name:"Iphone 15",
+            price: 1800,
+            qty: 5,
+            image:"/images/logo192.png"
+        }
     ];
     return (
         <div>
             <h2>{cat.name}</h2>
             <p>Số lượng sản phẩm: {cat.count}</p>
             <div className="row">
-                <Product product={products[0]}/>
-                <Product product={products[1]}/>
-                <Product product={products[2]}/>
+                {
+                   products.map((e,i)=>{ 
+                       // e <=> products[i]
+                        return (<Product key={i} product={e}/>)
+                   })  
+                }
+                
             </div>
         </div>
     );
