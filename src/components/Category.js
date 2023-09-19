@@ -1,5 +1,5 @@
 import Product from "./Product";
-import { useState,React } from "react";
+import React,{ useState } from "react";
 function Category(props){
     const cat = props.cat;
     const [products,setProducts] = useState([]);// khởi tạo products là 1 state có giá trị ban đầu là [] rỗng
@@ -27,14 +27,14 @@ function Category(props){
         setPr({...pr,[k]:v});
     }
     const submitProduct = (e)=>{
-        const ls = products;
-        ls.push(pr);
-        setProducts(ls);
+        // products.push(pr);
+        // setProducts(products);
+        setProducts(products=> [...products,pr]);
         e.preventDefault();
     }
     return (
         <div className="row">
-             <h2>{cat.name}</h2>
+             <h2>{cat.name} COunt:{products.length}</h2>
             <div className="col-3">
                 <form action="#" onSubmit={submitProduct} method="post">
                     <div className="mb-3">
