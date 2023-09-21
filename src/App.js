@@ -1,17 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-
-import Category from './components/Category';
+import Header from "./components/layouts/header";
+import Menu from "./components/layouts/menu";
 
 function App() { // jsx
-  const c = {
-    name: "Smart Phone",
-    count: 3
-  };
+  
   return (
-    <div className='container'>
-      <Category cat={c} />
-    </div>
+      <div className="app">
+        <Header />
+        <Menu/>
+      </div>
   );
 }
 
