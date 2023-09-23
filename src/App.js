@@ -4,6 +4,7 @@ import Menu from "./components/layouts/menu";
 import Home from "./components/pages/Home";
 import Category from "./components/pages/Category";
 import Product from "./components/pages/Product";
+import Weather from "./components/pages/Weather";
 
 function App() { // jsx
   
@@ -16,6 +17,7 @@ function App() { // jsx
                 <Route path="/" element={<Home/>}/>
                 <Route path="/category" element={<Category/>}/>
                 <Route path="/product" element={<Product/>}/>
+                <Route path="/weather" element={<Weather/>}/>
             </Routes>
            
         </main>

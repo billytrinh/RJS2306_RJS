@@ -51,7 +51,7 @@ export default function Menu(props){
                         <NavLink to="/cart" className="nav-link">Cart</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Weather</NavLink>
+                        <NavLink to="/weather" className="nav-link">Weather</NavLink>
                     </li>
                 </ul>
                 <form className="d-flex" role="search">
