@@ -1,6 +1,18 @@
 import { NavLink } from "react-router-dom";
 import {Navbar,NavDropdown,Nav} from 'react-bootstrap';
+import { useEffect, useState } from "react";
 export default function Menu(props){
+    const [categories,setCategories] = useState([]);
+    const loadCategories = ()=>{
+        const url = `https://dummyjson.com/products/categories`;
+        fetch(url).then(data=>data.json())
+        .then(data=>{
+            setCategories(data);
+        })
+    }
+    useEffect(()=>{
+        loadCategories();
+    },[]);
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container">
@@ -21,15 +33,13 @@ export default function Menu(props){
                                 title="Category"
                                 menuVariant="dark"
                                 >
-                                <NavDropdown.Item >Action</NavDropdown.Item>
-                                <NavDropdown.Item >
-                                    Another action
-                                </NavDropdown.Item>
-                                <NavDropdown.Item >Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item >
-                                    Separated link
-                                </NavDropdown.Item>
+                                    {
+                                        categories.map((e,i)=>{
+                                            return (<NavDropdown.Item key={i} className="text-capitalize">{e}</NavDropdown.Item>)
+                                        })
+                                    }
+                                
+                               
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
@@ -39,6 +49,9 @@ export default function Menu(props){
                     </li>
                     <li className="nav-item">
                         <NavLink to="/cart" className="nav-link">Cart</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/cart" className="nav-link">Weather</NavLink>
                     </li>
                 </ul>
                 <form className="d-flex" role="search">

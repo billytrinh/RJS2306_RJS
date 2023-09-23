@@ -34,7 +34,7 @@ function Home(){
                     {
                         products.map((e,i)=>{
                             return (
-                            <Col xs={3} className="mb-3 mt-3">
+                            <Col xs={3} key={i} className="mb-3 mt-3">
                                 <ProductGrid product={e} />
                             </Col>
                             )
