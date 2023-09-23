@@ -1,4 +1,5 @@
-
+import { NavLink } from "react-router-dom";
+import {Navbar,NavDropdown,Nav} from 'react-bootstrap';
 export default function Menu(props){
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -10,15 +11,35 @@ export default function Menu(props){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
+                        <NavLink to="/" className="nav-link">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Category</a>
+                        <Navbar.Collapse id="navbar-dark-example">
+                            <Nav>
+                                <NavDropdown
+                                id="nav-dropdown-dark-example"
+                                title="Category"
+                                menuVariant="dark"
+                                >
+                                <NavDropdown.Item >Action</NavDropdown.Item>
+                                <NavDropdown.Item >
+                                    Another action
+                                </NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item >
+                                    Separated link
+                                </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Product</a>
+                        <NavLink to="/product" className="nav-link">Product</NavLink>
                     </li>
-                   
+                    <li className="nav-item">
+                        <NavLink to="/cart" className="nav-link">Cart</NavLink>
+                    </li>
                 </ul>
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
