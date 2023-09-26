@@ -1,14 +1,18 @@
 import { NavLink } from "react-router-dom";
 import {Navbar,NavDropdown,Nav} from 'react-bootstrap';
 import { useEffect, useState } from "react";
+import api from "../../api";
 export default function Menu(props){
     const [categories,setCategories] = useState([]);
-    const loadCategories = ()=>{
-        const url = `https://dummyjson.com/products/categories`;
-        fetch(url).then(data=>data.json())
-        .then(data=>{
-            setCategories(data);
-        })
+    const loadCategories = async ()=>{
+        const url = `products/categories`;
+       try {
+        const rs = await api.get(url);
+        setCategories(rs.data);
+       } catch (error) {
+        
+       }
+
     
     }
     useEffect(()=>{
@@ -36,7 +40,9 @@ export default function Menu(props){
                                 >
                                     {
                                         categories.map((e,i)=>{
-                                            return (<NavDropdown.Item key={i} className="text-capitalize">{e}</NavDropdown.Item>)
+                                            return (<NavDropdown.Item key={i} className="text-capitalize">
+                                                <NavLink to={`/category/${e}`}>{e}</NavLink>
+                                            </NavDropdown.Item>)
                                         })
                                     }
                                 
