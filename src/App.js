@@ -16,7 +16,7 @@ function App() { // jsx
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/category/:slug" element={<Category/>}/>
-                <Route path="/product" element={<Product/>}/>
+                <Route path="/product/:id" element={<Product/>}/>
                 <Route path="/weather" element={<Weather/>}/>
             </Routes>
            
