@@ -2,6 +2,7 @@ import { Col, Row} from "react-bootstrap";
 import { ProductGrid } from "../shared/product-grid";
 import Slider from "../shared/slider";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Home(){
     const [products,setProducts] = useState([]);
@@ -10,10 +11,20 @@ function Home(){
         // lay sp tu api ve
         // set gia tri vao products
         const url = `https://dummyjson.com/products?limit=12`;
-        fetch(url).then(data=>data.json())
-        .then(data=>{
-            setProducts(data.products);
-        })
+        // fetch(url).then(data=>data.json())
+        // .then(data=>{
+        //     setProducts(data.products);
+        // }) 
+        // GET POST PUT DELETE 
+        axios.get(url)
+            .then(data=>{
+                // dữ liệu từ api sẽ phải nằm trong data.data
+                // console.log(data);
+                setProducts(data.data.products);
+            })
+            .catch(e=>{ // sẽ thực hiện khi gặp sự cố cố(lỗi)
+
+            })
     }
     useEffect(()=>{  // sử dụng hàm useEffect -> nó đang chạy luôn
         // các việc mà nó sẽ làm khi có sự kiện phát ra
