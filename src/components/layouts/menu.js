@@ -9,6 +9,7 @@ export default function Menu(props){
         .then(data=>{
             setCategories(data);
         })
+    
     }
     useEffect(()=>{
         loadCategories();
