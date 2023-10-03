@@ -29,7 +29,9 @@ function Product(){
         cart.push(product);
         // setState({...state,cart:cart});
         dispatch({type:ACTION.UPDATE_CART,payload:cart});
-
+        setTimeout(()=>{
+            dispatch({type:ACTION.HIDE_LOADING})
+        },1000)
     }
     return (
         <div className="container">

@@ -14,6 +14,7 @@ function App() { // jsx
   const [state,dispatch] = useReducer(reducer,STATE);
   return (
     <AppProvider value={{state,dispatch}}>
+      <div style={{display:state.loading?"block":"none"}} className="bg-fade"></div>
       <div className="app">
         <Header />
         <Menu/>
