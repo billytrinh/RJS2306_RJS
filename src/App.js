@@ -6,13 +6,14 @@ import Category from "./components/pages/Category";
 import Product from "./components/pages/Product";
 import Weather from "./components/pages/Weather";
 import { AppProvider } from "./context/context";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import STATE from "./context/initState";
+import reducer from "./context/reducer";
 
 function App() { // jsx
-  const [state,setState] = useState(STATE)
+  const [state,dispatch] = useReducer(reducer,STATE);
   return (
-    <AppProvider value={{state,setState}}>
+    <AppProvider value={{state,dispatch}}>
       <div className="app">
         <Header />
         <Menu/>

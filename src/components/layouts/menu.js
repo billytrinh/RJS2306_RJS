@@ -5,7 +5,7 @@ import api from "../../api";
 import Context from "../../context/context";
 export default function Menu(props){
     const [categories,setCategories] = useState([]);
-    const {state,setState} = useContext(Context);
+    const {state,dispatch} = useContext(Context);
     const loadCategories = async ()=>{
         const url = `products/categories`;
        try {

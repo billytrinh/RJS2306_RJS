@@ -7,7 +7,7 @@ function Product(){
     const {id} = useParams();
     const [product,setProduct] = useState({}); // local state (private memory)
     // const [cart,setCart] = useState([]);
-    const {state,setState} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
+    const {state,dispatch} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
     const loadProduct = async ()=>{
         try {
             const url = `product/${id}`;
@@ -26,7 +26,9 @@ function Product(){
         // const x = cart; x.push(product); setCart(x);
         const cart = state.cart;
         cart.push(product);
-        setState({...state,cart:cart});
+        // setState({...state,cart:cart});
+        dispatch({type:"UPDATE_CART",payload:cart});
+
     }
     return (
         <div className="container">
