@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
+import Context from "../../context/context";
 // Global state: state dành cho tòan bộ web, tức là component nào cũng có thể sử dụng
 function Product(){
     const {id} = useParams();
     const [product,setProduct] = useState({}); // local state (private memory)
-    const [cart,setCart] = useState([]);
+    // const [cart,setCart] = useState([]);
+    const {state,setState} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
     const loadProduct = async ()=>{
         try {
             const url = `product/${id}`;
@@ -14,22 +16,25 @@ function Product(){
         } catch (error) {
             
         }
-    }
+    } 
+    // SPA - Single page application
     useEffect(()=>{
         loadProduct();
     },id) 
     const addToCart = ()=>{
-        setCart([...cart,product]);
+        // setCart([...cart,product]);
         // const x = cart; x.push(product); setCart(x);
-
+        const cart = state.cart;
+        cart.push(product);
+        setState({...state,cart:cart});
     }
     return (
         <div className="container">
-            <h2>{cart.length}</h2>
             <h1>{product.title}</h1>
             <h3>{product.price}</h3>
             <p><span>{product.qty}</span> 
             <button onClick={addToCart} type="button" className="btn btn-primary">Add To Cart</button>
+            <button onClick={addToCart} type="button" className="btn btn-primary">Add To Favorites</button>
             </p>
         </div>
     )

@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import {Navbar,NavDropdown,Nav} from 'react-bootstrap';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../api";
+import Context from "../../context/context";
 export default function Menu(props){
     const [categories,setCategories] = useState([]);
+    const {state,setState} = useContext(Context);
     const loadCategories = async ()=>{
         const url = `products/categories`;
        try {
@@ -55,7 +57,10 @@ export default function Menu(props){
                         <NavLink to="/product" className="nav-link">Product</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Cart(0)</NavLink>
+                        <NavLink to="/cart" className="nav-link">Cart({state.cart.length})</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/cart" className="nav-link">Favorites({state.cart.length})</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/weather" className="nav-link">Weather</NavLink>
