@@ -55,7 +55,7 @@ export default function Menu(props){
                         <NavLink to="/product" className="nav-link">Product</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Cart</NavLink>
+                        <NavLink to="/cart" className="nav-link">Cart(0)</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/weather" className="nav-link">Weather</NavLink>

@@ -19,7 +19,7 @@ function Category(){
     }
     useEffect(()=>{
         loadProduct();
-    },[]);
+    },slug);
     return (
         <div className="container">
             <h1 className="text-capitalize">{slug}</h1>
