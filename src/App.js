@@ -9,9 +9,11 @@ import { AppProvider } from "./context/context";
 import { useReducer, useState } from "react";
 import STATE from "./context/initState";
 import reducer from "./context/reducer";
+import Cart from "./components/pages/Cart";
 
 function App() { // jsx
-  const [state,dispatch] = useReducer(reducer,STATE);
+  const initData = localStorage.getItem("state")?JSON.parse(localStorage.getItem("state")):STATE;
+  const [state,dispatch] = useReducer(reducer,initData);
   return (
     <AppProvider value={{state,dispatch}}>
       <div style={{display:state.loading?"block":"none"}} className="bg-fade"></div>
@@ -24,6 +26,7 @@ function App() { // jsx
                 <Route path="/category/:slug" element={<Category/>}/>
                 <Route path="/product/:id" element={<Product/>}/>
                 <Route path="/weather" element={<Weather/>}/>
+                <Route path="/cart" element={<Cart/>}/>
             </Routes>
            
         </main>
