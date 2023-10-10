@@ -10,14 +10,14 @@ export default function Header(props){
                         </a>
                     </div>
                     <div className="col">
-                        <ul class="list-group list-group-horizontal float-end mt-5">
-                            <li class="list-group-item border border-0">
+                        <ul className="list-group list-group-horizontal float-end mt-5">
+                            <li className="list-group-item border border-0">
                                 <a className="text-black text-decoration-none" href="#">Login</a>
                             </li>
-                            <li class="list-group-item border border-0">
+                            <li className="list-group-item border border-0">
                                 <a className="text-black text-decoration-none" href="#">Regsiter</a>
                             </li>
-                            <li class="list-group-item border border-0">
+                            <li className="list-group-item border border-0">
                                 <a className="text-black text-decoration-none" href="#">Favorites</a>
                             </li>
                         
