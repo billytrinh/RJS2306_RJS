@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
-import Context from "../../context/context";
-import ACTION from "../../context/action";
+import ACTION from "../../redux/action";
+import { connect } from "react-redux";
+// import Context from "../../context/context";
+// import ACTION from "../../context/action";
 // Global state: state dành cho tòan bộ web, tức là component nào cũng có thể sử dụng
-function Product(){
+function Product(props){
     const {id} = useParams();
     const [product,setProduct] = useState({}); // local state (private memory)
     // const [cart,setCart] = useState([]);
-    const {state,dispatch} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
+    // const {state,dispatch} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
     const loadProduct = async ()=>{
         try {
             const url = `product/${id}`;
@@ -25,12 +27,15 @@ function Product(){
     const addToCart = ()=>{
         // setCart([...cart,product]);
         // const x = cart; x.push(product); setCart(x);
-        const cart = state.cart;
+        const cart = props.state.cart;
         cart.push(product);
         // setState({...state,cart:cart});
-        dispatch({type:ACTION.UPDATE_CART,payload:cart});
+        // dispatch({type:ACTION.UPDATE_CART,payload:cart});
+
+        props.dispatch(cart);
+
         setTimeout(()=>{
-            dispatch({type:ACTION.HIDE_LOADING})
+            // dispatch({type:ACTION.HIDE_LOADING})
         },1000)
     }
     return (
@@ -44,4 +49,14 @@ function Product(){
         </div>
     )
 }
-export default Product;
+const mapStateToProps = (state,ownProps) =>{
+    return {
+        state: state
+    }
+}
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        dispatch: (cart)=> dispatch({type: ACTION.UPDATE_CART,payload: cart})
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Product);
