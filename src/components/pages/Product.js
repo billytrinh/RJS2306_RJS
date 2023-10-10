@@ -36,6 +36,7 @@ function Product(props){
 
         setTimeout(()=>{
             // dispatch({type:ACTION.HIDE_LOADING})
+            props.hideLoading();
         },1000)
     }
     return (
@@ -56,7 +57,8 @@ const mapStateToProps = (state,ownProps) =>{
 }
 const mapDispatchToProps = (dispatch)=>{
     return {
-        dispatch: (cart)=> dispatch({type: ACTION.UPDATE_CART,payload: cart})
+        dispatch: (cart)=> dispatch({type: ACTION.UPDATE_CART,payload: cart}),
+        hideLoading: ()=>dispatch({type: ACTION.HIDE_LOADING})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Product);

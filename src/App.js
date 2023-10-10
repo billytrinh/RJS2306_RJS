@@ -10,13 +10,16 @@ import Weather from "./components/pages/Weather";
 // import STATE from "./context/initState";
 // import reducer from "./context/reducer";
 import Cart from "./components/pages/Cart";
-
-function App() { // jsx
+import { connect } from "react-redux";
+function App(props) { // jsx
   // const initData = localStorage.getItem("state")?JSON.parse(localStorage.getItem("state")):STATE;
   // const [state,dispatch] = useReducer(reducer,initData);
+
+  const loading = props.loading;
   return (
     // <AppProvider value={{state,dispatch}}>
-      // <div style={{display:state.loading?"block":"none"}} className="bg-fade"></div>
+    <>
+      <div style={{display:loading?"block":"none"}} className="bg-fade"></div>
       <div className="app">
         <Header />
         <Menu/>
@@ -31,8 +34,13 @@ function App() { // jsx
            
         </main>
       </div>
+      </>
       // </AppProvider>
   );
 }
-
-export default App;
+const mapStateToProps = (state,ownProps)=>{
+  return {
+    loading: state.loading
+  }
+}
+export default connect(mapStateToProps,null)(App);
