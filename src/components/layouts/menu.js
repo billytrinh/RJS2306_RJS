@@ -2,10 +2,13 @@ import { NavLink } from "react-router-dom";
 import {Navbar,NavDropdown,Nav} from 'react-bootstrap';
 import { useContext, useEffect, useState } from "react";
 import api from "../../api";
-import Context from "../../context/context";
-export default function Menu(props){
+import { connect } from "react-redux";
+// import Context from "../../context/context";
+function Menu(props){
     const [categories,setCategories] = useState([]);
-    const {state,dispatch} = useContext(Context);
+    // const {state,dispatch} = useContext(Context);
+    const state = props.state;
+    console.log(state);
     const loadCategories = async ()=>{
         const url = `products/categories`;
        try {
@@ -57,10 +60,10 @@ export default function Menu(props){
                         <NavLink to="/product" className="nav-link">Product</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Cart({state.cart.length})</NavLink>
+                        <NavLink to="/cart" className="nav-link">Cart()</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Favorites({state.cart.length})</NavLink>
+                        <NavLink to="/cart" className="nav-link">Favorites()</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/weather" className="nav-link">Weather</NavLink>
@@ -75,3 +78,9 @@ export default function Menu(props){
             </nav>
     );
 }
+const mapStateToProps = (state,ownProps) =>{
+    return {
+        cart: state.cart
+    }
+}
+export default connect(mapStateToProps,null)(Menu);

@@ -5,18 +5,18 @@ import Home from "./components/pages/Home";
 import Category from "./components/pages/Category";
 import Product from "./components/pages/Product";
 import Weather from "./components/pages/Weather";
-import { AppProvider } from "./context/context";
-import { useReducer, useState } from "react";
-import STATE from "./context/initState";
-import reducer from "./context/reducer";
+// import { AppProvider } from "./context/context";
+// import { useReducer, useState } from "react";
+// import STATE from "./context/initState";
+// import reducer from "./context/reducer";
 import Cart from "./components/pages/Cart";
 
 function App() { // jsx
-  const initData = localStorage.getItem("state")?JSON.parse(localStorage.getItem("state")):STATE;
-  const [state,dispatch] = useReducer(reducer,initData);
+  // const initData = localStorage.getItem("state")?JSON.parse(localStorage.getItem("state")):STATE;
+  // const [state,dispatch] = useReducer(reducer,initData);
   return (
-    <AppProvider value={{state,dispatch}}>
-      <div style={{display:state.loading?"block":"none"}} className="bg-fade"></div>
+    // <AppProvider value={{state,dispatch}}>
+      // <div style={{display:state.loading?"block":"none"}} className="bg-fade"></div>
       <div className="app">
         <Header />
         <Menu/>
@@ -31,7 +31,7 @@ function App() { // jsx
            
         </main>
       </div>
-      </AppProvider>
+      // </AppProvider>
   );
 }
 
