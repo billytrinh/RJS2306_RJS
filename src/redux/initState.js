@@ -2,6 +2,10 @@ const STATE = { // tạo ra 1 giá trị mặc định ban đầu cho GLOBAL STA
     cart: [],
     favorites:[],
     loading: false,
-    user:{} // register / login
+    user:{
+        email:'',
+        name:'',
+        password:''
+    } // register / login
 }
 export default STATE;
