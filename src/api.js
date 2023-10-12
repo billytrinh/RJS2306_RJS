@@ -1,9 +1,13 @@
 import axios from "axios";
 
-export default axios.create({
+const api =  axios.create({
     baseURL: `http://139.180.186.20:3003/`,
     headers:{}
 });
+export const updateJWT = (token)=>{
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+export default api;
 
 // synchronize - lệnh viết trước thì xong trước
 // JS - Asynchronize - bất đồng bộ - Promise

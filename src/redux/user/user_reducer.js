@@ -10,7 +10,7 @@ const STATE = {
 const initData = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):STATE;
 const user_reducer = (state = initData, action)=>{
     switch(action.type){
-        case USER_ACTION.LOGIN: return updateLocalStorage({...state,user:action.payload.user,jwt: action.payload.token});
+        case USER_ACTION.LOGIN: return updateLocalStorage({...state,jwt: action.payload});
         // case USER_ACTION.LOGIN: return updateLocalStorage({...state,user:action.payload.user,jwt: action.payload.token});
         default: return state;
     }

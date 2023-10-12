@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Col, Form, FormGroup, FormLabel, InputGroup, Row } from "react-bootstrap";
-import api from "../../api";
+import api, { updateJWT } from "../../api";
+import USER_ACTION from "../../redux/user/user_action";
+import { connect } from "react-redux";
 
 function Login(props){
     const [user,setUser] = useState({email:"",password:''});
@@ -12,9 +14,11 @@ function Login(props){
         try {
             const url = 'auth/login';
             const rs = await api.post(url,user);
-            console.log(rs);
+            const token = rs.data.token;
+            props.login(token);
+            updateJWT(token);
         } catch (error) {
-            
+            alert(error.response.data.message)
         }
         
     }
@@ -40,4 +44,10 @@ function Login(props){
         </div>
     )
 }
-export default Login;
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        login: token => { dispatch({type:USER_ACTION.LOGIN,payload: token})}
+    }
+    
+}
+export default connect(null,mapDispatchToProps)(Login);
