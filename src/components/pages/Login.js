@@ -3,12 +3,14 @@ import { Button, Col, Form, FormGroup, FormLabel, InputGroup, Row } from "react-
 import api, { updateJWT } from "../../api";
 import USER_ACTION from "../../redux/user/user_action";
 import { connect } from "react-redux";
+import { redirect, useNavigate } from "react-router-dom";
 
 function Login(props){
     const [user,setUser] = useState({email:"",password:''});
     const handleChange = (e)=>{
         setUser({...user,[e.target.name]:e.target.value})
     }
+    const  navigate = useNavigate();
     const handleSubmit = async (e)=>{
         e.preventDefault();
         try {
@@ -16,7 +18,8 @@ function Login(props){
             const rs = await api.post(url,user);
             const token = rs.data.token;
             props.login(token);
-            updateJWT(token);
+            updateJWT(token);// lần sau sử dụng api sẽ được đính kèm token vào sẵn
+            navigate("/");
         } catch (error) {
             alert(error.response.data.message)
         }
