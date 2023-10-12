@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: `https://dummyjson.com/`,
+    baseURL: `http://139.180.186.20:3003/`,
     headers:{}
 });
 

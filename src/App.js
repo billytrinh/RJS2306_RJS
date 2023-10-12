@@ -11,6 +11,7 @@ import Weather from "./components/pages/Weather";
 // import reducer from "./context/reducer";
 import Cart from "./components/pages/Cart";
 import { connect } from "react-redux";
+import Login from "./components/pages/Login";
 function App(props) { // jsx
   // const initData = localStorage.getItem("state")?JSON.parse(localStorage.getItem("state")):STATE;
   // const [state,dispatch] = useReducer(reducer,initData);
@@ -30,6 +31,7 @@ function App(props) { // jsx
                 <Route path="/product/:id" element={<Product/>}/>
                 <Route path="/weather" element={<Weather/>}/>
                 <Route path="/cart" element={<Cart/>}/>
+                <Route path="/login" element={<Login/>}/>
             </Routes>
            
         </main>

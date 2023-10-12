@@ -67,6 +67,9 @@ function Menu(props){
                     <li className="nav-item">
                         <NavLink to="/weather" className="nav-link">Weather</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink to="/login" className="nav-link">Login</NavLink>
+                    </li>
                 </ul>
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
