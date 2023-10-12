@@ -4,6 +4,7 @@ import api, { updateJWT } from "../../api";
 import USER_ACTION from "../../redux/user/user_action";
 import { connect } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login(props){
     const [user,setUser] = useState({email:"",password:''});
@@ -14,8 +15,8 @@ function Login(props){
     const handleSubmit = async (e)=>{
         e.preventDefault();
         try {
-            const url = 'auth/login';
-            const rs = await api.post(url,user);
+            const url = 'http://139.180.186.20:3003/auth/login';
+            const rs = await axios.post(url,user);
             const token = rs.data.token;
             props.login(token);
             updateJWT(token);// lần sau sử dụng api sẽ được đính kèm token vào sẵn
