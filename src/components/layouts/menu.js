@@ -62,7 +62,7 @@ function Menu(props){
                         <NavLink to="/cart" className="nav-link">Cart({state.cart.length})</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/cart" className="nav-link">Favorites({state.favorites.length})</NavLink>
+                        <NavLink to="/cart" className="nav-link">Favorites()</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/weather" className="nav-link">Weather</NavLink>
@@ -78,8 +78,9 @@ function Menu(props){
     );
 }
 const mapStateToProps = (state,ownProps) =>{
+    console.log(state);
     return {
-        state: state
+        state: state.cart_reducer
     }
 }
 export default connect(mapStateToProps,null)(Menu);

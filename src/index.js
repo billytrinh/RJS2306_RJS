@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import reducer from './redux/reducer';
+// import reducer from './redux/reducer';
+import root_reducer from './redux/root_reducer';
 import { createStore } from 'redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root')); 
 //context api (react) - react hook
-let store = createStore(reducer);
+let store = createStore(root_reducer);
 root.render(
   <React.StrictMode>
     <Provider store={store}>

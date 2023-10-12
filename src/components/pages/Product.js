@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
-import ACTION from "../../redux/action";
+import CART_ACTION from "../../redux/cart/cart_action";
 import { connect } from "react-redux";
 // import Context from "../../context/context";
 // import ACTION from "../../context/action";
@@ -36,7 +36,7 @@ function Product(props){
 
         setTimeout(()=>{
             // dispatch({type:ACTION.HIDE_LOADING})
-            props.hideLoading();
+            // props.hideLoading();
         },1000)
     }
     return (
@@ -52,13 +52,13 @@ function Product(props){
 }
 const mapStateToProps = (state,ownProps) =>{
     return {
-        state: state
+        state: state.cart_reducer
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return {
-        dispatch: (cart)=> dispatch({type: ACTION.UPDATE_CART,payload: cart}),
-        hideLoading: ()=>dispatch({type: ACTION.HIDE_LOADING})
+        dispatch: (cart)=> dispatch({type: CART_ACTION.UPDATE_CART,payload: cart}),
+        // hideLoading: ()=>dispatch({type: ACTION.HIDE_LOADING})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Product);
