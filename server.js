@@ -1,6 +1,7 @@
 const express=  require("express");
 const app = express();
 const port = 4000;
+const {check,validationResult} = require("express-validator");
 
 app.listen(port,function(){
     console.log("Server is running...");
@@ -35,7 +36,20 @@ app.get("/product/:id",async function(req,res){
         return res.status(400).send(error.message);
     }
 });
-app.post("/auth/login",async function(req,res){
+
+const loginValidator = ()=>{
+    return [
+        check("email","Email không được để trống").not().isEmpty(),
+        check("email","Email phải đúng định dạng").isEmail(),
+        check("password","Mật khẩu phải từ 6 ký tự").isLength({min:6})
+    ];
+}
+app.post("/auth/login",loginValidator(),async function(req,res){
+    const errors = validationResult(req);
+    console.log(errors);
+    if(!errors.isEmpty()){
+        return res.status(401).json({errors:errors.array()});
+    }
     try {
         const url = 'http://139.180.186.20:3003/auth/login';
         const user = req.body;// {email:.., password:..}
