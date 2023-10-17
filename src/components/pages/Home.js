@@ -3,7 +3,7 @@ import { ProductGrid } from "../shared/product-grid";
 import Slider from "../shared/slider";
 import { useEffect, useState } from "react";
 import { list_product } from "../../services/product.service";
-
+import { Pagination } from 'antd';
 function Home(){
     const [products,setProducts] = useState([]);
 
@@ -36,6 +36,7 @@ function Home(){
                             )
                         })
                     }
+                    <Pagination defaultCurrent={1} total={50} />
                 </Row>
             </div>
         </>
