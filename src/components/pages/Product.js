@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../api";
 import CART_ACTION from "../../redux/cart/cart_action";
 import { connect } from "react-redux";
+import { detail_product } from "../../services/product.service";
 // import Context from "../../context/context";
 // import ACTION from "../../context/action";
 // Global state: state dành cho tòan bộ web, tức là component nào cũng có thể sử dụng
@@ -12,13 +12,8 @@ function Product(props){
     // const [cart,setCart] = useState([]);
     // const {state,dispatch} = useContext(Context);// kết nối và lấy state từ context chung (global memory)
     const loadProduct = async ()=>{
-        try {
-            const url = `product/${id}`;
-            const rs = await api.get(url);
-            setProduct(rs.data);
-        } catch (error) {
-            
-        }
+        const data =  await detail_product(id);
+        setProduct(data);
     } 
     // SPA - Single page application
     useEffect(()=>{
