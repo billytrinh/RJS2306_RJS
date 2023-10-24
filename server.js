@@ -2,9 +2,18 @@ const express=  require("express");
 const app = express();
 const port = 4000;
 const {check,validationResult} = require("express-validator");
-
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 app.listen(port,function(){
     console.log("Server is running...");
+})
+// connect db
+const mongoose = require("mongoose");
+const url_db= `mongodb+srv://root:Xc49RKSaqvVFtQfN@cluster0.hfbob.azure.mongodb.net/demo`
+mongoose.connect(url_db).then(()=>{
+    console.log("Connected DB");
+}).catch(err=>{
+    console.log(err);
 })
 // CORS policy (cross origin policy)
 app.use(function(req,res,next){
@@ -46,25 +55,58 @@ const loginValidator = ()=>{
 }
 app.post("/auth/login",loginValidator(),async function(req,res){
     const errors = validationResult(req);
-    console.log(errors);
     if(!errors.isEmpty()){
         return res.status(401).json({errors:errors.array()});
     }
     try {
-        const url = 'http://139.180.186.20:3003/auth/login';
-        const user = req.body;// {email:.., password:..}
-        const rs = await fetch(url,{
-            method:"POST",// GET POST PUT DELETE
-            mode: "cors",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
+        // b1 - tìm xem email có ko 0-> nếu ko có trả về 401
+        const email = req.body.email;
+        const userModel = require("./server/user");
+        const u = await userModel.findOne({email:email});
+        if(u == null){
+            res.status(401).json({message:"Email or password is not correct"});
+            return;
+        }
+        // b2 - đối chiếu password bằng verify -> sai trả về 401
+        const verify = await bcrypt.compare(req.body.password,u.password);
+        if(!verify){
+            res.status(401).json({message:"Email or password is not correct"});
+            return;
+        }
+        // b3 - đúng -> trả về thông tin user
+        return res.json({
+            email:u.email,
+            full_name:u.full_name,
+            token: jwt.sign({email:u.email,full_name:u.full_name,_id:u._id},'RESTFULAPIs')
         });
-        const data = await rs.json();
-        
-        return res.send(data);
     } catch (error) {
         return res.status(401).send(error.message);
+    }
+})
+const registerValidator = ()=>{
+    return [
+        check("full_name","Họ và tên không được để trống").not().isEmpty(),
+        check("email","Email không được để trống").not().isEmpty(),
+        check("email","Email phải đúng định dạng").isEmail(),
+        check("password","Mật khẩu phải từ 6 ký tự").isLength({min:6})
+    ];
+}
+app.post("/auth/register",registerValidator(),async function(req,res){
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(401).json({errors:errors.array()});
+    }
+    try {
+        const data = req.body;
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(data.password,salt);
+        data.password = hashed;
+        const userModel = require("./server/user");
+        // them user vao db
+        const u = new userModel(data);
+        u.save();
+        res.json({message:"Done"})
+    } catch (error) {
+        res.status(401).json({message:error.message});
     }
 })
