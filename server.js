@@ -22,6 +22,23 @@ app.use(function(req,res,next){
     next();
 })
 app.use(express.urlencoded({extended:true}))
+// middleware
+const checkAuth = (req,res,next)=>{
+    if(req.headers && req.headers.authorization && req.headers.authorization.split(" ")[0]=== "Bearer"){
+        const token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token,"RESTFULAPIs",function(err,decode){
+            if(err) req.user = undefined;
+            req.user = decode;
+            return next();
+        });
+    }else{
+        req.user = undefined;
+        return res.status(401).json({message:"Unauthorized user"});
+    }
+}
+app.use("/checkout",checkAuth);
+
+
 
 app.get("/products",async function(req,res){ 
     try {
@@ -110,3 +127,8 @@ app.post("/auth/register",registerValidator(),async function(req,res){
         res.status(401).json({message:error.message});
     }
 })
+
+app.post("/checkout",  function(req,res){
+    res.json({message:"DONE"});
+})
+
