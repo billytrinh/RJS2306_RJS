@@ -38,8 +38,6 @@ const checkAuth = (req,res,next)=>{
 }
 app.use("/checkout",checkAuth);
 
-
-
 app.get("/products",async function(req,res){ 
     try {
         const limit = req.query.limit?req.query.limit:12; // query parameters
