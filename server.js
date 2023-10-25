@@ -129,4 +129,6 @@ app.post("/auth/register",registerValidator(),async function(req,res){
 app.post("/checkout",  function(req,res){
     res.json({message:"DONE"});
 })
-
+// UI (Reactjs) Responsive - API (nodejs-express - mongodb) (GET DATA)
+// chỉ làm web cho GÚEST - ko cần làm cho admin
+// Home - Search - Detail - Cart - Checkout 
